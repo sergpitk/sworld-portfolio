@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Items;
+use App\Entity\Documents;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Items|null find($id, $lockMode = null, $lockVersion = null)
- * @method Items|null findOneBy(array $criteria, array $orderBy = null)
- * @method Items[]    findAll()
- * @method Items[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Documents|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Documents|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Documents[]    findAll()
+ * @method Documents[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ItemsRepository extends ServiceEntityRepository
+class DocumentsRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Items::class);
+        parent::__construct($registry, Documents::class);
     }
 
     // /**
