@@ -8,12 +8,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfilerController extends AbstractController
 {
     /**
-     * @Route("/profiler", name="profiler")
+     * @Route("/", name="profiler", methods={"GET", "HEAD"})
      */
     public function index()
     {
-        return $this->render('profiler/index.html.twig', [
-            'controller_name' => 'ProfilerController',
-        ]);
+        return $this->redirect('_profiler', 301);
     }
 }
