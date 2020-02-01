@@ -86,7 +86,7 @@ class DocumentsController extends AbstractController
             } catch (\Exception $e) {
             }
             $document->setFile('file');
-            $document->setLink($fileUploader->getTargetDirectory().$document->getPdfFilename());
+            $document->setPdfLink($fileUploader->getTargetDirectory().$document->getPdfFilename());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);

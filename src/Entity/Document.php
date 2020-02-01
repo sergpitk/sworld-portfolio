@@ -22,16 +22,6 @@ class Document
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $file;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $thumbnail;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $created;
@@ -47,14 +37,27 @@ class Document
     private $user_id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $link;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $pdfFilename;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pdfLink;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnailFileName;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnailLink;
+
+
+
 
     public function getId(): ?int
     {
@@ -85,14 +88,14 @@ class Document
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getThumbnailFileName(): ?string
     {
-        return $this->thumbnail;
+        return $this->thumbnailFileName;
     }
 
-    public function setThumbnail(?string $thumbnail): self
+    public function setThumbnailFileName(?string $thumbnailFileName): self
     {
-        $this->thumbnail = $thumbnail;
+        $this->thumbnailFileName = $thumbnailFileName;
 
         return $this;
     }
@@ -133,26 +136,38 @@ class Document
         return $this;
     }
 
-    public function getLink(): ?string
+    public function getPdfLink(): ?string
     {
-        return $this->link;
+        return $this->pdfLink;
     }
 
-    public function setLink(?string $link): self
+    public function setPdfLink(?string $pdfLink): self
     {
-        $this->link = $link;
+        $this->pdfLink = $pdfLink;
 
         return $this;
     }
 
-    public function getPdfFilename()
+    public function getPdfFilename(): ?string
     {
         return $this->pdfFilename;
     }
 
-    public function setPdfFilename($pdfFilename)
+    public function setPdfFilename($pdfFilename): self
     {
         $this->pdfFilename = $pdfFilename;
+
+        return $this;
+    }
+
+    public function getThumbnailLink(): ?string
+    {
+        return $this->thumbnailLink;
+    }
+
+    public function setThumbnailLink($thumbnailLink): self
+    {
+        $this->pdfFilename = $thumbnailLink;
 
         return $this;
     }
