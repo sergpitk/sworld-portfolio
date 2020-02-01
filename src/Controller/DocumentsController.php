@@ -49,6 +49,34 @@ class DocumentsController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{document}/attachment/upload", name="document-get-attachment-upload-get", methods={"GET", "HEAD"} )
+     * @param $document
+     * @return JsonResponse
+     */
+    public function documentGetHeadAttachmentUploadGet($document)
+    {
+        return $this->json([
+            'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentGetHeadAttachmentUploadGet',
+            'document' => $document
+        ]);
+    }
+
+    /**
+     * @Route("/{document}/attachment/upload", name="document-get-attachment-upload-post", methods={"POST"} )
+     * @param $document
+     * @return JsonResponse
+     */
+    public function documentGetHeadAttachmentUploadPost($document)
+    {
+        return $this->json([
+            'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentGetHeadAttachmentUploadPost',
+            'document' => $document
+        ]);
+    }
+
 
     /**
      * @Route("/{document}/attachment", name="document-get-attachment", methods={"GET", "HEAD"} )
