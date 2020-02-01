@@ -13,9 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentsController extends AbstractController
 {
     /**
-     * @Route("/documents", name="items")
+     * @Route("/documents", name="documents", methods={"GET", "HEAD"} )
      */
-    public function index()
+    public function documentsGet()
+    {
+        return $this->render('documents/index.html.twig', [
+            'controller_name' => 'DocumentsController',
+        ]);
+    }
+
+    /**
+     * @Route("/documents", name="documents", methods={"POST"} )
+     */
+    public function documentsPost()
     {
         return $this->render('documents/index.html.twig', [
             'controller_name' => 'DocumentsController',
