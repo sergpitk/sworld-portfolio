@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -13,22 +14,45 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentsController extends AbstractController
 {
     /**
-     * @Route("/documents", name="documents", methods={"GET", "HEAD"} )
+     * @Route("/document/{document}", name="document", methods={"GET", "HEAD"} )
+     * @param $document
+     * @return JsonResponse
      */
-    public function documentsGet()
+    public function documentGetHead($document)
     {
-        return $this->render('documents/index.html.twig', [
+        return $this->json([
             'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentGetHead',
+            'document' => $document
+        ]);
+    }
+
+
+    /**
+     * @Route("/document/{document}", name="document", methods={"DELETE"} )
+     * @param $document
+     * @return JsonResponse
+     */
+    public function documentDelete($document)
+    {
+        return $this->json([
+            'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentDelete',
+            'document' => $document
         ]);
     }
 
     /**
-     * @Route("/documents", name="documents", methods={"POST"} )
+     * @Route("/documents/", name="documents", methods={"GET", "HEAD", "POST"} )
+     * @return JsonResponse
      */
-    public function documentsPost()
+    public function documentsGetHeadPost()
     {
-        return $this->render('documents/index.html.twig', [
+        return $this->json([
             'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentsGetHeadPost'
         ]);
     }
+
+
 }
