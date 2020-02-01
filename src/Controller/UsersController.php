@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UsersController extends AbstractController
 {
     /**
-     * @Route("/", name="users-post", methods={"POST"} )
+     * @Route("/users", name="users-post", methods={"POST"} )
      * @return JsonResponse
      */
     public function usersPost()
@@ -26,7 +26,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/", name="users-get", methods={"GET", "HEAD"} )
+     * @Route("/users", name="users-get", methods={"GET", "HEAD"} )
      * @return JsonResponse
      */
     public function usersGetHead()
