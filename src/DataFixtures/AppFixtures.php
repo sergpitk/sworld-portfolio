@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
 
     public function loadDocuments(ObjectManager $manager)
     {
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 0; $i < 40; $i++) {
             $document = new Document();
             $document->setTitle($this->faker->text(20));
             $document->setFile($this->faker->text(20));
