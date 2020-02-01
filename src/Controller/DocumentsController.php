@@ -16,9 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentsController extends AbstractController
 {
 
-
-
-
     /**
      * @Route("/{document}/attachment/previews/{preview}", name="document-get-attachment-previews-preview", methods={"GET", "HEAD"} )
      * @param $document
@@ -52,7 +49,7 @@ class DocumentsController extends AbstractController
     }
 
     /**
-     * @Route("/{document}/attachment/upload", name="document-get-attachment-upload-get", methods={"GET", "HEAD"} )
+     * @Route("/{document}/attachment/upload", name="document-attachment-upload-get", methods={"GET", "HEAD"} )
      * @param $document
      * @return JsonResponse
      */
@@ -66,22 +63,22 @@ class DocumentsController extends AbstractController
     }
 
     /**
-     * @Route("/{document}/attachment/upload", name="document-get-attachment-upload-post", methods={"POST"} )
+     * @Route("/{document}/attachment/upload", name="document-attachment-upload-post", methods={"POST"} )
      * @param $document
      * @return JsonResponse
      */
-    public function documentGetHeadAttachmentUploadPost($document)
+    public function documentAttachmentUploadPost($document)
     {
         return $this->json([
             'controller_name' => 'DocumentsController',
-            'methods_name' => 'documentGetHeadAttachmentUploadPost',
+            'methods_name' => 'documentAttachmentUploadPost',
             'document' => $document
         ]);
     }
 
 
     /**
-     * @Route("/{document}/attachment", name="document-get-attachment", methods={"GET", "HEAD"} )
+     * @Route("/{document}/attachment", name="document-attachment-get", methods={"GET", "HEAD"} )
      * @param $document
      * @return JsonResponse
      */
