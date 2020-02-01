@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Document;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -123,14 +125,23 @@ class DocumentsController extends AbstractController
 
     /**
      * @Route("/", name="documents", methods={"GET", "HEAD", "POST"} )
+     * @param int $page
+     * @param Request $request
      * @return JsonResponse
      */
-    public function documentsGetHeadPost()
+    public function documentsGetHeadPost(Request $request, $page = 1)
     {
-        return $this->json([
-            'controller_name' => 'DocumentsController',
-            'methods_name' => 'documentsGetHeadPost'
-        ]);
+        $limit = $request->get('limit', 20);
+        $repository = $this->getDoctrine()->getRepository(Document::class);
+        $items = $repository->findBy([],[],$limit,$page);
+
+        return $this->json(
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'data' => $items
+            ]
+        );
     }
 
 
