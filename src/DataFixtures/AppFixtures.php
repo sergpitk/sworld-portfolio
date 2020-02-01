@@ -27,9 +27,9 @@ class AppFixtures extends Fixture
             $document->setTitle($this->faker->text(20));
             $document->setFile($this->faker->text(20));
             $document->setCreated((new \DateTime('now')));
-            $document->setLink($this->faker->slug($document->getTitle()));
+            $document->setLink($this->slug->slugify($document->getTitle()));
             $document->setThumbnail($this->faker->text(20));
-            $document->setUserId($this->faker->randomNumber(2));
+            $document->setUserId($this->faker->randomNumber(2, true));
             $manager->persist($document);
         }
         $manager->flush();
