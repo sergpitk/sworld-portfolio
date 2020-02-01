@@ -77,26 +77,16 @@ class DocumentsController extends AbstractController
             $pdfFile = $form['pdf']->getData();
             if ($pdfFile) {
                 $pdfFileName = $fileUploader->upload($pdfFile);
-
-                // Move the file to the directory where pdf are stored
-                try {
-                    $pdfFile->move(
-                        $this->getParameter('pdf_directory'),
-                        $pdfFileName
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
                 $document->setPdfFilename($pdfFileName);
             }
-
-            // todo persist the $document variable
             $document->setTitle('document');
             $document->setUserId(22);
-            $document->setCreated((new \DateTime('now')));
+            try {
+                $document->setCreated((new \DateTime('now', new \DateTimeZone('Europe/Helsinki'))));
+            } catch (\Exception $e) {
+            }
             $document->setFile('file');
+            $document->setLink($fileUploader->getTargetDirectory().$document->getPdfFilename());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);
@@ -109,13 +99,6 @@ class DocumentsController extends AbstractController
         return $this->render('documents/new.html.twig', [
             'form' => $form->createView(),
         ]);
-
-
-        /*return $this->json([
-            'controller_name' => 'DocumentsController',
-            'methods_name' => 'documentAttachmentUploadPost',
-            'document' => $document
-        ]);*/
     }
 
 
@@ -173,6 +156,8 @@ class DocumentsController extends AbstractController
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
         $items = $repository->findBy([],[],$limit,$offset);
+
+
 
         return $this->json(
             [
