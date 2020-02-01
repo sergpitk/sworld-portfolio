@@ -9,12 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ItemsController
  * @package App\Controller
- * @Route("/api/v1")
+ * @Route("/api/v1/documents")
  */
 class DocumentsController extends AbstractController
 {
     /**
-     * @Route("/document/{document}", name="document", methods={"GET", "HEAD"} )
+     * @Route("/{document}", name="document-get", methods={"GET", "HEAD"} )
      * @param $document
      * @return JsonResponse
      */
@@ -29,7 +29,7 @@ class DocumentsController extends AbstractController
 
 
     /**
-     * @Route("/document/{document}", name="document", methods={"DELETE"} )
+     * @Route("/{document}", name="document-delete", methods={"DELETE"} )
      * @param $document
      * @return JsonResponse
      */
@@ -43,7 +43,7 @@ class DocumentsController extends AbstractController
     }
 
     /**
-     * @Route("/documents/", name="documents", methods={"GET", "HEAD", "POST"} )
+     * @Route("/", name="documents", methods={"GET", "HEAD", "POST"} )
      * @return JsonResponse
      */
     public function documentsGetHeadPost()
