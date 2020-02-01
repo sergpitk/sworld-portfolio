@@ -11,6 +11,7 @@ namespace App\Form;
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -35,7 +36,7 @@ class DocumentType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '2048k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
@@ -44,7 +45,9 @@ class DocumentType extends AbstractType
                     ])
                 ],
             ])
-            // ...
+            ->add('save', SubmitType::class, [
+                'attr' => ['class' => 'save'],
+            ]);            // ...
         ;
     }
 

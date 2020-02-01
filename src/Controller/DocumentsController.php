@@ -3,10 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Form\DocumentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class ItemsController
@@ -48,32 +54,60 @@ class DocumentsController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{document}/attachment/upload", name="document-attachment-upload-get", methods={"GET", "HEAD"} )
-     * @param $document
-     * @return JsonResponse
-     */
-    public function documentGetHeadAttachmentUploadGet($document)
-    {
-        return $this->json([
-            'controller_name' => 'DocumentsController',
-            'methods_name' => 'documentGetHeadAttachmentUploadGet',
-            'document' => $document
-        ]);
-    }
+
 
     /**
-     * @Route("/{document}/attachment/upload", name="document-attachment-upload-post", methods={"POST"} )
+     * @Route("/{document}/attachment/upload", name="document-attachment-upload-post" )
      * @param $document
-     * @return JsonResponse
+     * @param Request $request
+     * @param FileUploader $fileUploader
+//     * @return JsonResponse
+     * @return RedirectResponse | Response
      */
-    public function documentAttachmentUploadPost($document)
+    public function documentAttachmentUploadPost($document, Request $request, FileUploader $fileUploader)
     {
-        return $this->json([
+
+        $document = new Document();
+        $form = $this->createForm(DocumentType::class, $document);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $pdfFile */
+            $pdfFile = $form['pdf']->getData();
+            if ($pdfFile) {
+                $pdfFileName = $fileUploader->upload($pdfFile);
+                $document->setPdfFilename($pdfFileName);
+
+                // Move the file to the directory where pdf are stored
+                try {
+                    $pdfFile->move(
+                        $this->getParameter('pdf_directory'),
+                        $pdfFileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $document->setPdfFilename($pdfFileName);
+            }
+
+            // ... persist the $product variable or any other work
+
+            return $this->redirect($this->generateUrl('documents-get'));
+
+        }
+
+        return $this->render('documents/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+
+
+        /*return $this->json([
             'controller_name' => 'DocumentsController',
             'methods_name' => 'documentAttachmentUploadPost',
             'document' => $document
-        ]);
+        ]);*/
     }
 
 
@@ -121,7 +155,7 @@ class DocumentsController extends AbstractController
     }
 
     /**
-     * @Route("/", name="documents", methods={"GET", "HEAD", "POST"} )
+     * @Route("/", name="documents-get", methods={"GET", "HEAD", "POST"} )
      * @param int $page
      * @param Request $request
      * @return JsonResponse
