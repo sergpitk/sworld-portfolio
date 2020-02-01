@@ -85,7 +85,6 @@ class DocumentsController extends AbstractController
                 $document->setCreated((new \DateTime('now', new \DateTimeZone('Europe/Helsinki'))));
             } catch (\Exception $e) {
             }
-            $document->setFile('file');
             $document->setPdfLink($fileUploader->getTargetDirectory().$document->getPdfFilename());
 
             $em = $this->getDoctrine()->getManager();
