@@ -13,6 +13,43 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DocumentsController extends AbstractController
 {
+
+
+
+
+    /**
+     * @Route("/{document}/attachment/previews/{preview}", name="document-get-attachment-previews-preview", methods={"GET", "HEAD"} )
+     * @param $document
+     * @param $preview
+     * @return JsonResponse
+     */
+    public function documentGetHeadAttachmentPreviewsPreview($document, $preview)
+    {
+        return $this->json([
+            'controller_name'   => 'DocumentsController',
+            'methods_name'      => 'documentGetHeadAttachmentPreviewsPreview',
+            'document'          => $document,
+            'preview'           => $preview
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/{document}/attachment/previews", name="document-get-attachment-previews", methods={"GET", "HEAD"} )
+     * @param $document
+     * @return JsonResponse
+     */
+    public function documentGetHeadAttachmentPreviews($document)
+    {
+        return $this->json([
+            'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentGetHeadAttachmentPreview',
+            'document' => $document
+        ]);
+    }
+
+
     /**
      * @Route("/{document}/attachment", name="document-get-attachment", methods={"GET", "HEAD"} )
      * @param $document
@@ -26,7 +63,6 @@ class DocumentsController extends AbstractController
             'document' => $document
         ]);
     }
-
 
     /**
      * @Route("/{document}", name="document-get", methods={"GET", "HEAD"} )
