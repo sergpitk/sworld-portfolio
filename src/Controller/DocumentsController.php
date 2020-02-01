@@ -14,6 +14,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocumentsController extends AbstractController
 {
     /**
+     * @Route("/{document}/attachment", name="document-get-attachment", methods={"GET", "HEAD"} )
+     * @param $document
+     * @return JsonResponse
+     */
+    public function documentGetHeadAttachment($document)
+    {
+        return $this->json([
+            'controller_name' => 'DocumentsController',
+            'methods_name' => 'documentGetHeadAttachment',
+            'document' => $document
+        ]);
+    }
+
+
+    /**
      * @Route("/{document}", name="document-get", methods={"GET", "HEAD"} )
      * @param $document
      * @return JsonResponse
