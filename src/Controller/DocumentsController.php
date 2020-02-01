@@ -76,7 +76,6 @@ class DocumentsController extends AbstractController
             $pdfFile = $form['pdf']->getData();
             if ($pdfFile) {
                 $pdfFileName = $fileUploader->upload($pdfFile);
-                $document->setPdfFilename($pdfFileName);
 
                 // Move the file to the directory where pdf are stored
                 try {
@@ -92,7 +91,7 @@ class DocumentsController extends AbstractController
                 $document->setPdfFilename($pdfFileName);
             }
 
-            // ... persist the $product variable or any other work
+            // todo persist the $document variable
 
             return $this->redirect($this->generateUrl('documents-get'));
 
@@ -156,19 +155,19 @@ class DocumentsController extends AbstractController
 
     /**
      * @Route("/", name="documents-get", methods={"GET", "HEAD", "POST"} )
-     * @param int $page
+     * @param int $offset
      * @param Request $request
      * @return JsonResponse
      */
-    public function documentsGetHeadPost(Request $request, $page = 1)
+    public function documentsGetHeadPost(Request $request, $offset = 40)
     {
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
-        $items = $repository->findBy([],[],$limit,$page);
+        $items = $repository->findBy([],[],$limit,$offset);
 
         return $this->json(
             [
-                'page' => $page,
+                'page' => $offset,
                 'limit' => $limit,
                 'data' => $items
             ]
