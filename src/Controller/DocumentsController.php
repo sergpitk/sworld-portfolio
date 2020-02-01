@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Document;
 use App\Form\DocumentType;
+use App\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -92,6 +93,14 @@ class DocumentsController extends AbstractController
             }
 
             // todo persist the $document variable
+            $document->setTitle('document');
+            $document->setUserId(22);
+            $document->setCreated((new \DateTime('now')));
+            $document->setFile('file');
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('documents-get'));
 
