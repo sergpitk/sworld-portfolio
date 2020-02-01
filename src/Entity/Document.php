@@ -51,6 +51,11 @@ class Document
      */
     private $link;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $pdfFilename;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +141,18 @@ class Document
     public function setLink(?string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getPdfFilename()
+    {
+        return $this->pdfFilename;
+    }
+
+    public function setPdfFilename($pdfFilename)
+    {
+        $this->pdfFilename = $pdfFilename;
 
         return $this;
     }
