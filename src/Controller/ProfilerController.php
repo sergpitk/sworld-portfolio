@@ -26,6 +26,14 @@ class ProfilerController extends AbstractController
         return $this->getProfiler();
     }
 
+    /**
+     * @Route("/api/v1", name="api-root", methods={"GET", "HEAD"})
+     */
+    public function getApiRoot()
+    {
+        return $this->redirect("/", 301);
+    }
+
 
     /**
      * @return RedirectResponse
