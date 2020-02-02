@@ -166,17 +166,7 @@ class DocumentsController extends AbstractController
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
         $items = $repository->findBy([],[],$limit,$offset);
-
-
         return $this->render('documents/documents.html.twig', ['data' => $items]);
-
-        /*return $this->json(
-            [
-                'page' => $offset,
-                'limit' => $limit,
-                'data' => $items
-            ]
-        );*/
     }
 
 
