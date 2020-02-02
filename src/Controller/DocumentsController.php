@@ -64,7 +64,7 @@ class DocumentsController extends AbstractController
      * @param Request $request
      * @param FileUploader $fileUploader
      * @param FileConvertor $fileConvertor
-     * //     * @return JsonResponse
+     //     * @return JsonResponse
      * @return RedirectResponse | Response
      */
     public function documentAttachmentUploadPost($document, Request $request, FileUploader $fileUploader, FileConvertor $fileConvertor)
@@ -87,7 +87,13 @@ class DocumentsController extends AbstractController
                 $document->setCreated((new \DateTime('now', new \DateTimeZone('Europe/Helsinki'))));
             } catch (\Exception $e) {
             }
+
+            $thumbnailFile = $fileConvertor->convert($pdfFile);
+            $document->setThumbnailFileName($thumbnailFile);
+
             $document->setPdfLink($fileUploader->getTargetDirectory().$document->getPdfFilename());
+            $document->setThumbnailLink($fileConvertor->getTargetDirectory().$document->getThumbnailFileName());
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($document);

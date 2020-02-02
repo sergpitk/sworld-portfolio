@@ -28,7 +28,7 @@ class FileConvertor
     {
         // todo get lib based on GraphicMagic and convert pdf to thumbnail
 
-        return $fileName;
+        return $fileName = 'pnggrad8rgb.png';
     }
 
     public function getTargetDirectory()

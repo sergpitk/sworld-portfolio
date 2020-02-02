@@ -155,7 +155,7 @@ class Document
 
     public function setThumbnailLink($thumbnailLink): self
     {
-        $this->pdfFilename = $thumbnailLink;
+        $this->thumbnailLink = $thumbnailLink;
 
         return $this;
     }
