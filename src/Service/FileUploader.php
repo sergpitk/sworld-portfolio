@@ -14,9 +14,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileUploader
 {
     private $targetDirectory;
+    private $prefixPath;
 
-    public function __construct($targetDirectory)
+    public function __construct($prefixPath, $targetDirectory)
     {
+        $this->prefixPath = $prefixPath;
         $this->targetDirectory = $targetDirectory;
     }
 
@@ -27,7 +29,7 @@ class FileUploader
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         try {
-            $file->move($this->getTargetDirectory(), $fileName);
+            $file->move($this->prefixPath.$this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
             // ... handle exception if something happens during file upload
         }

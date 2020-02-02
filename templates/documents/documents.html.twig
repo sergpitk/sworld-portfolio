@@ -15,12 +15,7 @@
     <div class="uk-grid-match uk-grid-column-small uk-grid-row-small uk-child-width-1-4@l uk-child-width-1-2@l" uk-grid>
 
     {% for item in data %}
-        <div class="uk-card" onclick="function showFullPdf() {
-                let file = {{ item.pdfLink | json_encode()}};
-                console.log(file);
-                return file;
-                }
-                showFullPdf()">
+        <div a class="uk-card"  href="#modal-media-image">
             <div class="uk-card-hover uk-card-default">
                 <div class="uk-card-header">
                     <div class="uk-align-center">
@@ -33,6 +28,12 @@
                 <div class="uk-card-body">
                     <img src="{{ item.thumbnailLink }}" width="100" height="100" alt="{{ item.title }}" title="{{ item.title }}"/>
                 </div>
+            </div>
+        </div>
+        <div id="modal-media-image" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+                <button class="uk-modal-close-outside" type="button" uk-close></button>
+                <img src="{{ item.pdfLink }}" alt="">
             </div>
         </div>
     {% endfor %}

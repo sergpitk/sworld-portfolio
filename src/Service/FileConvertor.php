@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class FileConvertor
 {
+    private $prefixPath;
     private $targetDirectory;
     private $sourceDirectory;
 
-    public function __construct($targetDirectory, $sourceDirectory)
+    public function __construct($prefixPath, $targetDirectory, $sourceDirectory)
     {
+        $this->prefixPath = $prefixPath;
         $this->targetDirectory = $targetDirectory;
         $this->sourceDirectory = $sourceDirectory;
     }
@@ -29,6 +31,13 @@ class FileConvertor
     {
         // todo get lib based on GraphicMagic and convert pdf to thumbnail
         $targetFile = $this->sourceDirectory.$sourceFileName;
+
+        // todo see above
+        /*try {
+            $file->move($this->prefixPath.$this->getTargetDirectory(), $targetFileName);
+        } catch (FileException $e) {
+            // ... handle exception if something happens during file upload
+        }*/
 
         return $targetFileName = 'pnggrad8rgb.png';
     }

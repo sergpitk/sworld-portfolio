@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    prefix_path: '%kernel.project_dir%/public'
     pdf_directory: '/uploads/pdf/'
     thumbnail_directory: '/uploads/thumbnails/'
 
@@ -30,8 +31,10 @@ services:
 
     App\Service\FileUploader:
         arguments:
+            $prefixPath:    '%prefix_path%'
             $targetDirectory: '%pdf_directory%'
     App\Service\FileConvertor:
         arguments:
+            $prefixPath:    '%prefix_path%'
             $sourceDirectory: '%pdf_directory%'
             $targetDirectory: '%thumbnail_directory%'

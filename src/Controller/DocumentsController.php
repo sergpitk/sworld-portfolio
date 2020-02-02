@@ -161,7 +161,7 @@ class DocumentsController extends AbstractController
      * @param Request $request
      * @return JsonResponse | Response
      */
-    public function documentsGetHeadPost(Request $request, $offset = 23)
+    public function documentsGetHeadPost(Request $request, $offset = 29)
     {
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
