@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     pdf_directory: '%kernel.project_dir%/public/uploads/pdf'
+    thumbnail_directory: '%kernel.project_dir%/public/uploads/thumbnails'
 
 services:
     # default configuration for services in *this* file
@@ -30,3 +31,6 @@ services:
     App\Service\FileUploader:
         arguments:
             $targetDirectory: '%pdf_directory%'
+    App\Service\FileConvertor:
+        arguments:
+            $targetDirectory: '%thumbnail_directory%'

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FileUploader;
+use App\Service\FileConvertor;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -62,10 +63,11 @@ class DocumentsController extends AbstractController
      * @param $document
      * @param Request $request
      * @param FileUploader $fileUploader
-//     * @return JsonResponse
+     * @param FileConvertor $fileConvertor
+     * //     * @return JsonResponse
      * @return RedirectResponse | Response
      */
-    public function documentAttachmentUploadPost($document, Request $request, FileUploader $fileUploader)
+    public function documentAttachmentUploadPost($document, Request $request, FileUploader $fileUploader, FileConvertor $fileConvertor)
     {
 
         $document = new Document();
