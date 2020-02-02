@@ -126,21 +126,18 @@ class DocumentsController extends AbstractController
     /**
      * @Route("/{document}", name="document-get", methods={"GET", "HEAD"} )
      * @param $document
-//     * @return JsonResponse
+     * @return JsonResponse
      */
     public function documentGetHead($document)
     {
-        // <embed src="../pdf/sample-3pp.pdf#page=2" type="application/pdf" width="100%" height="100%">
+        $repository = $this->getDoctrine()->getRepository(Document::class);
+        $items = $repository->findOneBy(['id' => $document]);
 
-        return $this->render('documents/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
-
-        /*return $this->json([
-            'controller_name' => 'DocumentsController',
-            'methods_name' => 'documentGetHead',
-            'document' => $document
-        ]);*/
+        return $this->json(
+            [
+                'data' => $items
+            ]
+        );
     }
 
 
