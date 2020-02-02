@@ -126,18 +126,19 @@ class DocumentsController extends AbstractController
     /**
      * @Route("/{document}", name="document-get", methods={"GET", "HEAD"} )
      * @param $document
-     * @return JsonResponse
+     * @return JsonResponse | Response
      */
     public function documentGetHead($document)
     {
         $repository = $this->getDoctrine()->getRepository(Document::class);
-        $items = $repository->findOneBy(['id' => $document]);
+        $items = $repository->findBy(['id' => $document]) ;
 
-        return $this->json(
+        return $this->render('documents/documents.html.twig', ['data' => $items]);
+        /*return $this->json(
             [
                 'data' => $items
             ]
-        );
+        );*/
     }
 
 
@@ -167,6 +168,12 @@ class DocumentsController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Document::class);
         $items = $repository->findBy([],[],$limit,$offset);
         return $this->render('documents/documents.html.twig', ['data' => $items]);
+
+        /*return $this->json(
+            [
+                'data' => $items
+            ]
+        );*/
     }
 
 

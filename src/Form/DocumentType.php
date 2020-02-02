@@ -23,7 +23,7 @@ class DocumentType extends AbstractType
         $builder
             // ...
             ->add('pdf', FileType::class, [
-                'label' => 'Brochure (PDF file)',
+                'label' => 'Upload PDF file',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
@@ -45,7 +45,7 @@ class DocumentType extends AbstractType
                     ])
                 ],
             ])
-            ->add('save', SubmitType::class, [
+            ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'save'],
             ]);            // ...
         ;
