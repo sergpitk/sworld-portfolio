@@ -9,30 +9,34 @@
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileConvertor
 {
     private $targetDirectory;
+    private $sourceDirectory;
 
-    public function __construct($targetDirectory)
+    public function __construct($targetDirectory, $sourceDirectory)
     {
         $this->targetDirectory = $targetDirectory;
+        $this->sourceDirectory = $sourceDirectory;
     }
 
     /**
-     * @param UploadedFile $file
+     * @param  $sourceFileName
      * @return mixed
      */
-    public function convert(UploadedFile $file)
+    public function convert($sourceFileName)
     {
         // todo get lib based on GraphicMagic and convert pdf to thumbnail
+        $targetFile = $this->sourceDirectory.$sourceFileName;
 
-        return $fileName = 'pnggrad8rgb.png';
+//        return $targetFileName = 'pnggrad8rgb.png';
+        return $targetFileName = 'file_example_PNG_500kB.png';
     }
 
     public function getTargetDirectory()
     {
         return $this->targetDirectory;
     }
+
 }

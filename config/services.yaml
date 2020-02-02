@@ -33,4 +33,5 @@ services:
             $targetDirectory: '%pdf_directory%'
     App\Service\FileConvertor:
         arguments:
+            $sourceDirectory: '%pdf_directory%'
             $targetDirectory: '%thumbnail_directory%'
