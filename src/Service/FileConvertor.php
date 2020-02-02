@@ -31,7 +31,6 @@ class FileConvertor
         $targetFile = $this->sourceDirectory.$sourceFileName;
 
         return $targetFileName = 'pnggrad8rgb.png';
-//        return $targetFileName = 'file_example_PNG_500kB.png';
     }
 
     public function getTargetDirectory()

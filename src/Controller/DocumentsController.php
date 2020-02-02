@@ -159,23 +159,24 @@ class DocumentsController extends AbstractController
      * @Route("/", name="documents-get", methods={"GET", "HEAD", "POST"} )
      * @param int $offset
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse | Response
      */
-    public function documentsGetHeadPost(Request $request, $offset = 3)
+    public function documentsGetHeadPost(Request $request, $offset = 23)
     {
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
         $items = $repository->findBy([],[],$limit,$offset);
 
 
+        return $this->render('documents/documents.html.twig', ['data' => $items]);
 
-        return $this->json(
+        /*return $this->json(
             [
                 'page' => $offset,
                 'limit' => $limit,
                 'data' => $items
             ]
-        );
+        );*/
     }
 
 
