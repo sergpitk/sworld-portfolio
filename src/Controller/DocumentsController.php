@@ -143,12 +143,18 @@ class DocumentsController extends AbstractController
 
 
     /**
-     * @Route("/{document}", name="document-delete", methods={"DELETE"} )
-     * @param $document
-     * @return JsonResponse
+     * @Route("/{id}", name="document-delete", methods={"DELETE"} )
+     * @param $id
+     * @return JsonResponse | RedirectResponse
      */
-    public function documentDelete($document)
+    public function documentDelete($id)
     {
+
+        $em = $this->getDoctrine()->getManager();
+        $document= $em->getReference(Document::class, $id);
+        $em->remove($document);
+        $em->flush();
+
         return $this->json([
             'controller_name' => 'DocumentsController',
             'methods_name' => 'documentDelete',
@@ -162,7 +168,7 @@ class DocumentsController extends AbstractController
      * @param Request $request
      * @return JsonResponse | Response
      */
-    public function documentsGetHeadPost(Request $request, $offset = 29)
+    public function documentsGetHeadPost(Request $request, $offset = 24)
     {
         $limit = $request->get('limit', 20);
         $repository = $this->getDoctrine()->getRepository(Document::class);
