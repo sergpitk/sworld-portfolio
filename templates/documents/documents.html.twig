@@ -26,12 +26,15 @@
                     </div>
                     <div class="uk-card-body">
                         <button class="uk-align-right" type="button" uk-close onclick="function deleteElement() {
-                                    console.log({{ item.id }});
-                                    fetch('https://sworld.thebx24.eu/api/v1/documents/' + {{ item.id }}, {
-                                    method: 'DELETE',
-                                    })
-                                    .then(res => res.text()) // or res.json()
-                                    .then(res => console.log(res))
+
+                                        fetch('https://sworld.thebx24.eu/api/v1/documents/' + {{ item.id }}, {
+                                        method: 'DELETE',
+                                        })
+                                        .then(res => res.text()) // or res.json()
+                                        .then(res => console.log(res))
+                                        .then(res => {
+                                            window.location.replace('https://sworld.thebx24.eu/api/v1/documents/');
+                                        });
                                 }
                                 deleteElement()"></button>
                         <div uk-lightbox>
